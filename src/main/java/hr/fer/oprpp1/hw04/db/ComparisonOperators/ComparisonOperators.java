@@ -14,12 +14,18 @@ public class ComparisonOperators {
 	public static final IComparisonOperator LIKE;
 
 	static {
-		LESS = (first, second) ->  first.compareToIgnoreCase(second) == 1;
-		LESS_OR_EQUALS = (first, second) -> first.compareToIgnoreCase(second) >= 0;
-		GREATER = (first, second) -> first.compareToIgnoreCase(second) == -1;
-		GREATER_OR_EQUALS = (first, second) -> first.compareToIgnoreCase(second) <= 0;
+		LESS = (first, second) ->  first.compareToIgnoreCase(second) < 0;
+		
+		LESS_OR_EQUALS = (first, second) -> first.compareToIgnoreCase(second) <= 0;
+		
+		GREATER = (first, second) -> first.compareToIgnoreCase(second) > 0;
+		
+		GREATER_OR_EQUALS = (first, second) -> first.compareToIgnoreCase(second) >= 0;
+		
 		EQUALS = (first,second) -> first.compareToIgnoreCase(second) == 0;
+		
 		NOT_EQUALS = (first, second) -> first.compareToIgnoreCase(second) != 0;
+		
 		LIKE = (statement, pattern) -> {
 			int starIndex = pattern.indexOf('*');
 			String endRequirement = pattern.substring(starIndex+1);
@@ -35,8 +41,6 @@ public class ComparisonOperators {
 			
 			return (statement.endsWith(endRequirement) && statement.startsWith(startRequirement)
 					&& startRequirement.length()+endRequirement.length()<=statement.length());
-				
-			
 		};
 	}
 }
