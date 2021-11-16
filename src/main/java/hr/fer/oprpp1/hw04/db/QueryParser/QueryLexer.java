@@ -133,6 +133,14 @@ public class QueryLexer {
 				currentIndex += 3;
 				return true;
 			}
+			operator = new String(data,currentIndex,2);
+			if (operator.equalsIgnoreCase("<=") || operator.equalsIgnoreCase(">=")) {
+				currentToken = new QueryLexerToken(QueryLexerTokenType.OPERATOR, operator);
+				currentIndex += 2;
+				return true;
+			}
+			
+			
 		}
 		if (data[currentIndex] == '=' || data[currentIndex] == '<' || data[currentIndex] == '>') {
 			currentToken = new QueryLexerToken(QueryLexerTokenType.OPERATOR, data[currentIndex]);

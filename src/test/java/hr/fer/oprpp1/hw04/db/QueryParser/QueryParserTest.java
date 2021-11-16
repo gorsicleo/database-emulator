@@ -18,9 +18,9 @@ public class QueryParserTest {
 	
 	@Test
 	public void queryParserTest2() {
-		QueryParser qp2 = new QueryParser("jmbag=\"0123456789\" and lastName>\"J\"");
+		QueryParser qp2 = new QueryParser("jmbag=\"0123456789\" and lastName>=\"J\"");
 		assertEquals(false, qp2.isDirectQuery());
-		assertThrows(IllegalArgumentException.class, () -> qp2.getQueriedJMBAG()); 
+		assertThrows(IllegalStateException.class, () -> qp2.getQueriedJMBAG()); 
 		assertEquals(2, qp2.getQuery().size());
 		//System.out.println("isDirectQuery(): " + qp2.isDirectQuery()); // false
 		// System.out.println(qp2.getQueriedJMBAG()); // would throw!
