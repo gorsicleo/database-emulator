@@ -23,6 +23,7 @@ public class StudentDB {
 		
 		StudentDatabase db = new StudentDatabase(lines);
 		System.out.println(db.toString());
+		//System.out.println(db.forJMBAG("0000000016"));
 		
 		
 	}
