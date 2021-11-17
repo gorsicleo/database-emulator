@@ -37,18 +37,28 @@ public class StudentDB {
 		while (!input.equals("exit") && !input.isBlank()) {
 			if (input.startsWith("query")) {
 				input = input.substring("query".length());
-				executeQuery(db,input);
+				try {
+					executeQuery(db,input);
+				} catch (Exception e) {
+					System.out.println("Opps error happend with following message: "+e.getMessage());
+					System.out.println("Hint: Make sure to use only legal attribute names and \n "
+							+ "make sure put all non-operator arguments in quotation marks.");
+				}
+				
 			}
 			System.out.print("> ");
 			input = scanner.nextLine();
 			
 		}
+		
+		System.out.println("Goodbye!");
 
 	}
 
 	private static void executeQuery(StudentDatabase db,String input) {
 		QueryParser parser = new QueryParser(input);
 		if (parser.isDirectQuery()) {
+			System.out.println("Using index for record retrieval.");
 			printRecords(Arrays.asList(db.forJMBAG(parser.getQueriedJMBAG())));
 		} else {
 			printRecords(db.filter(new QueryFilter(parser.getQuery())));
@@ -57,7 +67,7 @@ public class StudentDB {
 	
 	private static void printRecords(List<StudentRecord> records) {
 		long size = records.stream().filter(Objects::nonNull).count();
-		System.out.println("> Records selected: "+size);
+		System.out.println("Records selected: "+size);
 		if (size==0) {
 			return;
 		}
