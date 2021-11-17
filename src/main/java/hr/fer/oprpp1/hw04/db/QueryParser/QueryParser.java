@@ -46,7 +46,7 @@ public class QueryParser {
 		List<ConditionalExpression> list = new ArrayList<>();
 		int currentIndex = 0;
 		while (currentIndex < tokens.size()) {
-			if (tokens.get(currentIndex).getValue().equals("and")) {
+			if (tokens.get(currentIndex).getValue().toString().equalsIgnoreCase("and")) {
 				currentIndex++;
 				continue;
 			}
@@ -77,7 +77,7 @@ public class QueryParser {
 			throw new IllegalStateException(String.format(INVALID_IDENTIFIER, tokens.get(index).getValue().toString()));
 		}
 		
-		switch (tokens.get(index+1).getValue().toString()) {
+		switch (tokens.get(index+1).getValue().toString().toUpperCase()) {
 		case "=":
 			operator = ComparisonOperators.EQUALS;
 			break;
@@ -100,6 +100,7 @@ public class QueryParser {
 			
 		case "LIKE":
 			operator = ComparisonOperators.LIKE;
+			break;
 			
 		case "!=":
 			operator = ComparisonOperators.NOT_EQUALS;
