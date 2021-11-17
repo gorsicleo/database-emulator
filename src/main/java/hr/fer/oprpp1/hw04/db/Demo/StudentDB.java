@@ -1,11 +1,15 @@
 package hr.fer.oprpp1.hw04.db.Demo;
 
 import java.io.IOException;
+import java.io.ObjectInputStream.GetField;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.OptionalInt;
 import java.util.Scanner;
 
 import hr.fer.oprpp1.hw04.db.QueryFilter.QueryFilter;
@@ -52,7 +56,24 @@ public class StudentDB {
 		}
 	
 	private static void printRecords(List<StudentRecord> records) {
+		long size = records.stream().filter(Objects::nonNull).count();
+		System.out.println("> Records selected: "+size);
+		if (size==0) {
+			return;
+		}
 		
+		int maxFirstNameLength = records.stream().mapToInt( (record) -> record.getFirstName().length()).max().getAsInt();
+		int maxLastNameLength = records.stream().mapToInt( (record) -> record.getLastName().length()).max().getAsInt();
+		
+		System.out.println("+" + "=".repeat(12) + "+" + "=".repeat(maxLastNameLength + 2) + "+"
+				+ "=".repeat(maxFirstNameLength + 2) + "+===+");
+		
+		records.stream().forEach( (record) -> System.out.println("| " + record.getJmbag() + " | " + record.getLastName()
+				+ " ".repeat(maxLastNameLength - record.getLastName().length()) + " | " + record.getFirstName()
+				+ " ".repeat(maxFirstNameLength - record.getFirstName().length()) + " | " + record.getFinalGrade() + " |"));
+		
+		System.out.println("+" + "=".repeat(12) + "+" + "=".repeat(maxLastNameLength + 2) + "+"
+				+ "=".repeat(maxFirstNameLength + 2) + "+===+");
 	}
 	
 	
