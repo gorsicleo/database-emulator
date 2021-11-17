@@ -1,5 +1,9 @@
 package hr.fer.oprpp1.hw04.db.StudentRecord;
 
+/**Models simple student record consisting od identifier jmbag which is unique, first name, last name, and grade
+ * @author gorsicleo
+ *
+ */
 public class StudentRecord {
 	
 	private String jmbag;
@@ -8,6 +12,12 @@ public class StudentRecord {
 	private int finalGrade;
 	
 	
+	/**Creates new student record, without validation of arguments
+	 * @param jmbag
+	 * @param lastName
+	 * @param firstName
+	 * @param finalGrade
+	 */
 	public StudentRecord(String jmbag, String lastName, String firstName, int finalGrade) {
 		this.jmbag = jmbag;
 		this.lastName = lastName;
@@ -70,6 +80,9 @@ public class StudentRecord {
 	}
 
 
+	/**Two records are considered equal if their jmbag property is equal
+	 *
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

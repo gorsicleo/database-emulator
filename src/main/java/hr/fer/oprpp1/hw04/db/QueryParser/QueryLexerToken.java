@@ -1,6 +1,10 @@
 package hr.fer.oprpp1.hw04.db.QueryParser;
 
 
+/**Class that models lexer token for imaginary query language
+ * @author gorsicleo
+ *
+ */
 public class QueryLexerToken {
 
 	/**Token type (IDENTIFIER;STRING;OPERATOR;EOF)*/

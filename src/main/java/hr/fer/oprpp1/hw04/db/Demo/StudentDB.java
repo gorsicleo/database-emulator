@@ -1,15 +1,12 @@
 package hr.fer.oprpp1.hw04.db.Demo;
 
 import java.io.IOException;
-import java.io.ObjectInputStream.GetField;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
-import java.util.OptionalInt;
 import java.util.Scanner;
 
 import hr.fer.oprpp1.hw04.db.QueryFilter.QueryFilter;
@@ -17,6 +14,10 @@ import hr.fer.oprpp1.hw04.db.QueryParser.QueryParser;
 import hr.fer.oprpp1.hw04.db.StudentDatabase.StudentDatabase;
 import hr.fer.oprpp1.hw04.db.StudentRecord.StudentRecord;
 
+/**Class that communicates with the user and queries the database. 
+ * @author gorsicleo
+ *
+ */
 public class StudentDB {
 
 	public static void main(String[] args) {
@@ -55,6 +56,10 @@ public class StudentDB {
 
 	}
 
+	/**Executes query and sends result to print method.
+	 * @param db StudentDatabase
+	 * @param input query String
+	 */
 	private static void executeQuery(StudentDatabase db,String input) {
 		QueryParser parser = new QueryParser(input);
 		if (parser.isDirectQuery()) {
@@ -65,6 +70,9 @@ public class StudentDB {
 			}
 		}
 	
+	/**Method prints query results in table-like format.
+	 * @param records List that needs to be printed
+	 */
 	private static void printRecords(List<StudentRecord> records) {
 		long size = records.stream().filter(Objects::nonNull).count();
 		System.out.println("Records selected: "+size);

@@ -1,6 +1,10 @@
 package hr.fer.oprpp1.hw04.db.QueryParser;
 
 
+/**Class models simple lexer for imaginary query language
+ * @author gorsicleo
+ *
+ */
 public class QueryLexer {
 	
 	/**Data where is text stored for analysis*/
@@ -76,7 +80,11 @@ public class QueryLexer {
 		}
 
 	}
-	
+	/**
+	 * Method checks if following characters can be grouped as string argument.
+	 * 
+	 * @return true if following characters words that are inside quotation marks.
+	 */
 	private boolean isString() {
 		if (data[currentIndex]=='"') {
 			currentIndex++;
@@ -96,7 +104,11 @@ public class QueryLexer {
 		return false;
 	}
 
-
+	/**
+	 * Method checks if following characters can be grouped as identifier.
+	 * 
+	 * @return true if following characters words that are not inside quotation marks.
+	 */
 	private boolean isIdentifier() {
 		if (Character.isLetter(data[currentIndex])) {
 			int startOfIdentifierIndex = currentIndex;
@@ -117,12 +129,12 @@ public class QueryLexer {
 	/**
 	 * Method checks if following characters can be grouped as operator.
 	 * 
-	 * @return true if following characters are +, -, *, /, ^
+	 * @return true if following characters are LIKE,AND,<=,<,>,>=,=,!=
 	 */
 	private boolean isOperator() {
 		if (currentIndex < data.length-4) {
 			String operator = new String(data,currentIndex,4);
-			if (operator.equalsIgnoreCase("LIKE")) {
+			if (operator.equals("LIKE")) {
 				currentToken = new QueryLexerToken(QueryLexerTokenType.OPERATOR, operator);
 				currentIndex += 4;
 				return true;
@@ -134,7 +146,7 @@ public class QueryLexer {
 				return true;
 			}
 			operator = new String(data,currentIndex,2);
-			if (operator.equalsIgnoreCase("<=") || operator.equalsIgnoreCase(">=")) {
+			if (operator.equalsIgnoreCase("<=") || operator.equalsIgnoreCase(">=") || operator.equals("!=")) {
 				currentToken = new QueryLexerToken(QueryLexerTokenType.OPERATOR, operator);
 				currentIndex += 2;
 				return true;

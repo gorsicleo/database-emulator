@@ -3,6 +3,11 @@ package hr.fer.oprpp1.hw04.db.ComparisonOperators;
 
 import hr.fer.oprpp1.hw04.db.IComparisonOperator.IComparisonOperator;
 
+/** Class offers public static final variables (i.e. constants) of
+ *  type IComparisonOperator
+ * @author gorsicleo
+ *
+ */
 public class ComparisonOperators {
 
 	public static final IComparisonOperator LESS;
